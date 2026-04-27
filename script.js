@@ -110,7 +110,17 @@ $(function () {
   });
 
   // Set container width - double width for spread
-  container.css('width', sz.w + 'px');
+  // Center the container for mobile
+  if (window.innerWidth <= 900) {
+    container.css({
+      'width': sz.w + 'px',
+      'margin': '0 auto',
+      'left': '50%',
+      'transform': 'translateX(-50%)'
+    });
+  } else {
+    container.css('width', sz.w + 'px');
+  }
   spine.css('display', 'block');
 
   // Hide loader after book is ready
@@ -195,7 +205,17 @@ $(function () {
     resizeTimeout = setTimeout(function() {
       const newSz = bookSize();
       book.turn('size', newSz.w, newSz.h);
-      container.css('width', newSz.w + 'px');
+      // Center the container for mobile
+      if (window.innerWidth <= 900) {
+        container.css({
+          'width': newSz.w + 'px',
+          'margin': '0 auto',
+          'left': '50%',
+          'transform': 'translateX(-50%)'
+        });
+      } else {
+        container.css('width', newSz.w + 'px');
+      }
     }, 250);
   });
 

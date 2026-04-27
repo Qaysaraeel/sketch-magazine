@@ -412,9 +412,29 @@ html, body {
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  html, body {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .scene {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .book-container {
+    margin: 0 auto !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
   #book {
-    width: 96vw !important;
-    height: calc(48vw * 1.414) !important;
+    width: 92vw !important;
+    height: calc(46vw * 1.414) !important;
+    margin: 0 auto;
   }
 
   .btn-nav {
