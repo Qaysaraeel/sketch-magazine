@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>quinsachisweet16</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="scene">
+    <button class="btn-nav btn-prev" id="btnPrev">&#8249;</button>
+
+    <div class="book-shadow"></div>
+    <div class="book-container" id="bookContainer">
+      <div class="spine" id="spine"></div>
+      <div id="book">
+
+        <!--
+          Struktur halaman Turn.js (display:double):
+          - Halaman 1 = blank/dummy (Turn.js selalu butuh hal. ganjil pertama)
+          - Halaman 2 = Cover (1.png) — tampil sendirian di kanan
+          - Halaman 3-42 = isi 2.png–41.png (spread 2 sisi)
+          - Halaman 43 = Back Cover (42.png) — tampil sendirian di kiri
+          - Halaman 44 = blank/dummy penutup
+        -->
+
+        <!-- Hal 1: dummy kiri (tak terlihat saat awal) -->
+        <div class="page blank"></div>
+
+        <!-- Hal 2: COVER — 1.png, satu sisi penuh -->
+        <div class="page cover-page"><img src="page/1.png" alt="Cover"></div>
+
+        <!-- Hal 3–42: isi 2.png sampai 41.png -->
+        <div class="page"><img src="page/2.png"  alt=""></div>
+        <div class="page"><img src="page/3.png"  alt=""></div>
+        <div class="page"><img src="page/4.png"  alt=""></div>
+        <div class="page"><img src="page/5.png"  alt=""></div>
+        <div class="page"><img src="page/6.png"  alt=""></div>
+        <div class="page"><img src="page/7.png"  alt=""></div>
+        <div class="page"><img src="page/8.png"  alt=""></div>
+        <div class="page"><img src="page/9.png"  alt=""></div>
+        <div class="page"><img src="page/10.png" alt=""></div>
+        <div class="page"><img src="page/11.png" alt=""></div>
+        <div class="page"><img src="page/12.png" alt=""></div>
+        <div class="page"><img src="page/13.png" alt=""></div>
+        <div class="page"><img src="page/14.png" alt=""></div>
+        <div class="page"><img src="page/15.png" alt=""></div>
+        <div class="page"><img src="page/16.png" alt=""></div>
+        <div class="page"><img src="page/17.png" alt=""></div>
+        <div class="page"><img src="page/18.png" alt=""></div>
+        <div class="page"><img src="page/19.png" alt=""></div>
+        <div class="page"><img src="page/20.png" alt=""></div>
+        <div class="page"><img src="page/21.png" alt=""></div>
+        <div class="page"><img src="page/22.png" alt=""></div>
+        <div class="page"><img src="page/23.png" alt=""></div>
+        <div class="page"><img src="page/24.png" alt=""></div>
+        <div class="page"><img src="page/25.png" alt=""></div>
+        <div class="page"><img src="page/26.png" alt=""></div>
+        <div class="page"><img src="page/27.png" alt=""></div>
+        <div class="page"><img src="page/28.png" alt=""></div>
+        <div class="page"><img src="page/29.png" alt=""></div>
+        <div class="page"><img src="page/30.png" alt=""></div>
+        <div class="page"><img src="page/31.png" alt=""></div>
+        <div class="page"><img src="page/32.png" alt=""></div>
+        <div class="page"><img src="page/33.png" alt=""></div>
+        <div class="page"><img src="page/34.png" alt=""></div>
+        <div class="page"><img src="page/35.png" alt=""></div>
+        <div class="page"><img src="page/36.png" alt=""></div>
+        <div class="page"><img src="page/37.png" alt=""></div>
+        <div class="page"><img src="page/38.png" alt=""></div>
+        <div class="page"><img src="page/39.png" alt=""></div>
+        <div class="page"><img src="page/40.png" alt=""></div>
+        <div class="page"><img src="page/41.png" alt=""></div>
+
+        <!-- Hal 43: BACK COVER — 42.png, satu sisi penuh -->
+        <div class="page cover-page"><img src="page/42.png" alt="Back Cover"></div>
+
+        <!-- Hal 44: dummy kanan penutup -->
+        <div class="page blank"></div>
+
+      </div>
+    </div>
+
+    <button class="btn-nav btn-next" id="btnNext">&#8250;</button>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="turn.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

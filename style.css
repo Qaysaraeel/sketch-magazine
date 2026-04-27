@@ -1,0 +1,279 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #f9c6d0 0%, #e8829a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Scene ── */
+.scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  visibility: hidden;
+}
+
+/* Row: prev + book + next */
+.scene > .btn-prev,
+.scene > .btn-next,
+.book-shadow,
+.book-container {
+  /* keep inline via flex row override */
+}
+
+/* wrap nav + book in a row */
+.scene {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+/* ── Book shadow ── */
+.book-shadow {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 40px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* ── Book container — smooth width transition ── */
+.book-container {
+  position: relative;
+  box-shadow:
+    -8px 0 20px rgba(0,0,0,0.5),
+     8px 0 20px rgba(0,0,0,0.4),
+     0 10px 40px rgba(0,0,0,0.6);
+  border-radius: 3px 6px 6px 3px;
+  /* width is set dynamically via JS; transition handled via JS-injected style */
+}
+
+/* Spine */
+.spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to right,
+    rgba(0,0,0,0.5) 0%,
+    rgba(255,255,255,0.1) 45%,
+    rgba(255,255,255,0.15) 55%,
+    rgba(0,0,0,0.4) 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* ── Book ── */
+#book {
+  width: 840px;
+  height: 594px;
+}
+
+.page {
+  overflow: hidden;
+  background: #fff;
+}
+
+.page.blank {
+  background: transparent;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.page.cover-page {
+  background: #1a0a0f;
+}
+
+.page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* ── Nav buttons ── */
+.btn-nav {
+  position: relative;
+  z-index: 20;
+  background: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.5);
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 1;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, opacity 0.3s;
+  user-select: none;
+}
+.btn-nav:hover { background: rgba(255,255,255,0.5); }
+.btn-nav.hidden { opacity: 0; pointer-events: none; }
+.btn-prev { margin-right: 16px; }
+.btn-next { margin-left:  16px; }
+
+/* ── Progress bar ── */
+#progressWrap {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 200;
+  pointer-events: none;
+}
+
+#progressTrack {
+  width: 200px;
+  height: 4px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 999px;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+}
+
+#progressThumb {
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+  border-radius: 999px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 4px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+#progressLabel {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  font-family: monospace;
+}
+
+/* ── Spotify Popup ── */
+#spotifyPopup {
+  position: fixed;
+  bottom: 64px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#spotifyPopup.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.spotify-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(18, 18, 18, 0.92);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  padding: 10px 20px 10px 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.spotify-label {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.spotify-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #1DB954;
+  color: #000;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.spotify-btn:hover {
+  background: #1ed760;
+  transform: scale(1.04);
+}
+
+.spotify-close {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.spotify-close:hover { color: rgba(255,255,255,0.8); }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  #book {
+    width: 96vw !important;
+    height: calc(48vw * 1.414) !important;
+  }
+  .btn-nav { display: none; }
+  .spine { display: none !important; }
+  .book-shadow { display: none; }
+
+  .scene::after {
+    content: '\2190 geser \2192';
+    color: rgba(255,255,255,0.5);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    position: fixed;
+    bottom: 52px;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  #progressTrack { width: 140px; }
+
+  #spotifyPopup { bottom: 72px; }
+  .spotify-label { display: none; }
+}
