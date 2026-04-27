@@ -8,6 +8,16 @@
 </head>
 <body>
 
+  <!-- Loading Animation -->
+  <div class="loader" id="loader">
+    <div class="loader-book">
+      <div class="loader-page"></div>
+      <div class="loader-page"></div>
+      <div class="loader-page"></div>
+    </div>
+    <div class="loader-text">Memuat...</div>
+  </div>
+
   <div class="scene">
     <button class="btn-nav btn-prev" id="btnPrev">&#8249;</button>
 
@@ -18,20 +28,18 @@
 
         <!--
           Struktur halaman Turn.js (display:double):
-          - Halaman 1 = blank/dummy (Turn.js selalu butuh hal. ganjil pertama)
-          - Halaman 2 = Cover (1.png) — tampil sendirian di kanan
-          - Halaman 3-42 = isi 2.png–41.png (spread 2 sisi)
-          - Halaman 43 = Back Cover (42.png) — tampil sendirian di kiri
-          - Halaman 44 = blank/dummy penutup
+          Semua halaman ditampilkan 2 sisi (spread)
+          - Halaman 1-2 = Cover + Daftar Isi
+          - Halaman 3-4 = Halaman 1 + Halaman 2
+          - Halaman 5-40 = Isi konten (spread 2 sisi)
+          - Halaman 41-42 = Halaman terakhir + Back Cover
         -->
 
-        <!-- Hal 1: dummy kiri (tak terlihat saat awal) -->
-        <div class="page blank"></div>
+        <!-- Spread 1: Daftar Isi (kiri) + Halaman 1 (kanan) -->
+        <div class="page"><img src="page/daftarisi.png" alt="Daftar Isi"></div>
+        <div class="page"><img src="page/1.png" alt="Halaman 1"></div>
 
-        <!-- Hal 2: COVER — 1.png, satu sisi penuh -->
-        <div class="page cover-page"><img src="page/1.png" alt="Cover"></div>
-
-        <!-- Hal 3–42: isi 2.png sampai 41.png -->
+        <!-- Spread 2-20: Isi konten -->
         <div class="page"><img src="page/2.png"  alt=""></div>
         <div class="page"><img src="page/3.png"  alt=""></div>
         <div class="page"><img src="page/4.png"  alt=""></div>
@@ -70,19 +78,43 @@
         <div class="page"><img src="page/37.png" alt=""></div>
         <div class="page"><img src="page/38.png" alt=""></div>
         <div class="page"><img src="page/39.png" alt=""></div>
+
+        <!-- Spread terakhir: Halaman 39 (kiri) + Back Cover (kanan) -->
         <div class="page"><img src="page/40.png" alt=""></div>
         <div class="page"><img src="page/41.png" alt=""></div>
-
-        <!-- Hal 43: BACK COVER — 42.png, satu sisi penuh -->
-        <div class="page cover-page"><img src="page/42.png" alt="Back Cover"></div>
-
-        <!-- Hal 44: dummy kanan penutup -->
-        <div class="page blank"></div>
+        <div class="page"><img src="page/backcover.png" alt="Back Cover"></div>
 
       </div>
     </div>
 
     <button class="btn-nav btn-next" id="btnNext">&#8250;</button>
+
+  </div>
+
+  <!-- Progress Bar (hanya bar, tanpa angka) -->
+  <div id="progressWrap">
+    <div id="progressTrack">
+      <div id="progressThumb"></div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Popup -->
+  <div id="waPopup" class="wa-popup">
+    <div class="wa-card">
+      <div class="wa-icon">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#25D366" d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.082c2.42 1.37 5.173 2.082 8.067 2.082 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-5.245 1.375 1.408-5.123-0.326-0.518c-1.32-2.105-2.02-4.53-2.02-7.053 0-7.435 6.065-13.5 13.5-13.5s13.5 6.065 13.5 13.5-6.065 13.5-13.5 13.5zM21.558 18.291c-0.212-0.106-1.246-0.615-1.438-0.685s-0.333-0.106-0.474 0.106c-0.141 0.212-0.548 0.685-0.672 0.826s-0.247 0.159-0.459 0.053c-1.184-0.591-1.964-1.058-2.742-2.394-0.205-0.352 0.205-0.327 0.589-1.092 0.064-0.141 0.032-0.265-0.018-0.371s-0.474-1.142-0.65-1.564c-0.17-0.409-0.344-0.354-0.474-0.36-0.122-0.006-0.263-0.006-0.404-0.006s-0.368 0.053-0.562 0.265c-0.194 0.212-0.742 0.727-0.742 1.77s0.759 2.051 0.864 2.192c0.106 0.141 1.492 2.281 3.62 3.2 0.507 0.22 0.902 0.35 1.211 0.448 0.509 0.162 0.971 0.139 1.336 0.085 0.409-0.061 1.246-0.512 1.422-1.007 0.176-0.495 0.176-0.919 0.123-1.007-0.053-0.088-0.194-0.141-0.406-0.247z"/>
+        </svg>
+      </div>
+      <div class="wa-content">
+        <span class="wa-label">Pemesanan</span>
+        <a href="http://wa.me/0881036647856" class="wa-btn" target="_blank" rel="noopener">
+          Hubungi Kami
+        </a>
+      </div>
+      <button class="wa-close" id="waClose">&times;</button>
+    </div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="turn.min.js"></script>
